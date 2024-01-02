@@ -106,7 +106,7 @@ const Register = () => {
         message.success("Đăng ký thành công!");
         setTimeout(() => {
           message.info(
-            "Bạn sẽ được chuyển hướng về trang đăng nhập trong 3 giây..."
+            "Bạn sẽ được chuyển hướng về trang đăng nhập sau 3 giây..."
           );
           setTimeout(() => navigate("/auth/login"), 3000);
         }, 2000);

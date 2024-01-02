@@ -1,21 +1,22 @@
 import React from "react";
+import Header from "../header";
+import "./style.css";
+import ProfileMain from "./components/profileMain";
+import ProfileNavigator from "./components/profileNavigator";
 
 const Profile = () => {
-  const { user, logout } = useAuth();
-  const handleLogout = () => {
-    logout();
-    useNavigate("/auth/login");
-  };
   return (
-    <div className="profile">
-      {user ? (
-        <div className="profile-user">
-          <p>Welcome, {user.username}</p>
-          <button onClick={handleLogout}>Logout</button>
+    <div style={{ margin: 0, padding: 0 }}>
+      <Header style={{ margin: 0, padding: 0 }} />
+      <div className="body-profile">
+        <div className="profiles-container">
+          <ProfileNavigator />
+
+          <ProfileMain />
         </div>
-      ) : (
-        <h4>No user available, please log in</h4>
-      )}
+      </div>
     </div>
   );
 };
+
+export default Profile;

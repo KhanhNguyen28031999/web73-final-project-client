@@ -1,70 +1,81 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #719aeb; /* Light gray background */
-    border-bottom: 1px solid #e5e5e5; /* Subtle border */
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #719aeb; /* Light gray background */
+  border-bottom: 1px solid #e5e5e5; /* Subtle border */
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-right: auto; /* Push logo to the left */
+}
+.search {
+  width: 50%; /* Set width of search input */
+  margin: 0 auto 15px auto; /* Center input horizontally */
+}
+
+.actions {
+  display: flex;
+  gap: 15px; /* Align action items horizontally */
+  margin-right: auto; /* Push actions to the right */
+}
+
+.actions p {
+  margin: 0; /* Xóa khoảng cách lề trên và dưới */
+  font-size: 14px; /* Kích thước chữ */
+  font-weight: bold; /* Độ đậm chữ */
+}
+
+.actions p:hover {
+  cursor: pointer; /* Hiển thị con trỏ chuột khi rê chuột vào */
+  color: #1890ff; /* Thay đổi màu chữ khi hover */
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  margin-left: 15px; /* Space between elements */
+}
+
+/* Visual Styles */
+.header input {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  margin-left: 15px;
+}
+
+.header div {
+  margin-left: 15px; /* Consistent spacing between elements */
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    align-items: flex-start;
+    padding: 15px;
   }
-  
+
   .logo {
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-right: auto; /* Push logo to the left */
+    margin-bottom: 15px;
   }
-  .search {
-    width: 50%; /* Set width of search input */
-    margin: 0 auto; /* Center input horizontally */
-  }
-  
+
   .actions {
-    display: flex; /* Align action items horizontally */
-    margin-left: auto; /* Push actions to the right */
+    margin-top: 15px;
   }
-  
-  .profile-container {
-    display: flex;
-    align-items: center;
-    margin-left: 15px; /* Space between elements */
-  }
-  
-  /* Visual Styles */
-  .header input {
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    margin-left: 15px;
-  }
-  
-  .header div {
-    margin-left: 15px; /* Consistent spacing between elements */
-  }
-  
-  /* Responsiveness */
-  @media (max-width: 768px) {
-    .header {
-      flex-direction: column; /* Stack elements vertically on smaller screens */
-      align-items: flex-start;
-      padding: 15px;
-    }
-  
-    .logo {
-      margin-bottom: 15px;
-    }
-  
-    .actions {
-      margin-top: 15px;
-    }
-  }
-  .profile-container{
-    border-radius: 30px;
-     width: 80px;
-     padding: 4px;
-     background-color: rebeccapurple;
-     
-  }
+}
+.profile-container {
+  border-radius: 30px;
+  width: 80px;
+  padding: 4px;
+  background-color: rebeccapurple;
+}

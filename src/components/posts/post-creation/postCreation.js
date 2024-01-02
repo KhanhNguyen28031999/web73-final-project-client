@@ -1,25 +1,46 @@
 import { useState } from "react";
 import "./style.css";
+import axios from "axios";
 
-const PostCreation = ({
-  createPost,
-  setPosts,
-  posts,
-  setIsPostCreationVisible,
-}) => {
+const PostCreation = ({ setIsPostCreationVisible }) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [postsLocal, setPostsLocal] = useState([]);
-  let titleInput;
-  let contentInput;
-  let hashtagsInput;
-  const handleSubmit = () => {
-    const title = titleInput.value;
-    const content = contentInput.value;
-    const hashtags = hashtagsInput.value;
-    setPostsLocal([...posts, { title, content, hashtags }]);
-    createPost(title, content, hashtags);
-    setIsVisible(false);
-    setPosts([...posts, { title, content, hashtags }]);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [hashtags, setHashtags] = useState("");
+
+  const handleSubmit = (e) => {
+    if (!title || !content || !hashtags) {
+      alert("Bạn chưa điền đầy đủ các trường !");
+    } else {
+      setTitle("");
+      setHashtags("");
+      setContent("");
+      setIsVisible(false);
+      setIsPostCreationVisible(false);
+    }
+  };
+
+  const handleCreatePost = (e) => {
+    handleSubmit();
+    e.preventDefault();
+    const newPost = {
+      title: title,
+      hashtags: hashtags.split(","),
+      content: content,
+      author: "test",
+    };
+
+    axios
+      .post("http://localhost:3001/posts", newPost)
+      .then(() => {
+        setTitle("");
+        setHashtags("");
+        setContent("");
+        console.log("Create a new post successful");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="post-creation" style={isVisible ? {} : { display: "none" }}>
@@ -30,18 +51,31 @@ const PostCreation = ({
         X
       </span>
       <h4>Hãy đăng tải trạng thái của bạn</h4>
-      <input placeholder="Tiêu đề" ref={(input) => (titleInput = input)} />
+      <input
+        id="title"
+        type="text"
+        placeholder="Tiêu đề"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
       <textarea
+        id="content"
         placeholder="Bạn đang cảm thấy như thế nào ?"
-        ref={(input) => (contentInput = input)}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        required
       />
       <div className="bar-hashtags">
         <input
-          placeholder="HashTags#"
-          ref={(input) => (hashtagsInput = input)}
+          id="hashtags"
+          placeholder="#HashTags"
+          value={hashtags}
+          onChange={(e) => setHashtags(e.target.value)}
+          required
         />
       </div>
-      <button onClick={handleSubmit}>Đăng bài viết</button>
+      <button onClick={handleCreatePost}>Đăng bài viết</button>
     </div>
   );
 };

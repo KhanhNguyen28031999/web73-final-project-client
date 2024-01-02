@@ -1,11 +1,13 @@
-const Pagination = ({ pages, pageSize, totalPages, onPageChange }) => {
+const Pagination = ({ page, pageSize, totalPages, onPageChange }) => {
   const isFirstPage = page === 1;
   const isLastPage = page === totalPages;
+
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages && newPage !== page) {
       onPageChange(newPage);
     }
   };
+
   return (
     <div className="pagination">
       <button onClick={() => handlePageChange(page - 1)} disabled={isFirstPage}>
