@@ -8,41 +8,42 @@ const PostCreation = ({ setIsPostCreationVisible }) => {
   const [content, setContent] = useState("");
   const [hashtags, setHashtags] = useState("");
 
-  // const handleSubmit = () => {
-  //   if (!title || !content || !hashtags) {
-  //     alert("Bạn chưa điền đầy đủ các trường !");
-  //     return;
-  //   } else {
-  //     setTitle("");
-  //     setHashtags("");
-  //     setContent("");
-  //     setIsVisible(false);
-  //     setIsPostCreationVisible(false);
-  //     handleCreatePost();
-  //   }
-  // };
+  const handleSubmit = () => {
+    if (!title || !content || !hashtags) {
+      alert("Bạn chưa điền đầy đủ các trường !");
+      return;
+    } else {
+      setTitle("");
+      setHashtags("");
+      setContent("");
+      setIsVisible(false);
+      setIsPostCreationVisible(false);
+    }
+  };
 
   const handleCreatePost = () => {
-    // handleSubmit();
+    handleSubmit();
     const newPost = {
       title: title,
       hashtags: hashtags,
       content: content,
     };
-    axios.post("http://localhost:3001/posts", newPost).then(() => {
-      console.log("Create newpost completed");
-    });
-    // axios
-    //   .post("http://localhost:3001/posts", newPost)
-    //   .then(() => {
-    //     setTitle("");
-    //     setHashtags("");
-    //     setContent("");
-    //     console.log("Create a new post successful");
-    //   })
-    //   .catch((error) => {
-    //     console.log("API error:", error);
-    //   });
+    axios
+      .post("http://localhost:3001/posts", newPost, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then(() => {
+        setTitle("");
+        setHashtags("");
+        setContent("");
+        console.log("Create a new post successful");
+      })
+      .catch((error) => {
+        console.log("API error:", error);
+      });
   };
   return (
     <div className="post-creation" style={isVisible ? {} : { display: "none" }}>

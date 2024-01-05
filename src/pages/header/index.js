@@ -8,45 +8,53 @@ const Header = () => {
   // const navigate = useNavigate();
 
   return (
-    // <div className="header">
-    //   <div className="logo">LOGO</div>
-    //   <input placeholder="Search" className="search" />
+    //
+    //
+    //
     //   <div className="actions">
     //     <p onClick={() => navigate("/home")}>Home</p>
     //     <p onClick={() => navigate("/profile")}>Profile</p>
     //   </div>
-    //   <div className="notice">
+    //
     //     <FaBell color="white" />
     //   </div>
-    //   <div className="message">
+    //
     //     <FaEnvelope color="white" />
     //   </div>
-    //   <div className="profile-container">Username</div>
+    //   Username</div>
     //   <div>Logout</div>
-    // </div>
-    <Navbar
-      style={{ fontSize: "18pt" }}
-      collapseOnSelect
-      expand="lg"
-      className="bg-body-tertiary"
-    >
-      <Navbar.Brand className="m-3" href="/home">
-        Mindx
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link href="/home">Trang chủ</Nav.Link>
-          <Nav.Link href="/profile">Trang cá nhân</Nav.Link>
-        </Nav>
-        <Nav>
-          <Nav.Link className="me-3" href="#features">
-            <FaBell color="black" />
-          </Nav.Link>
-          <Nav.Link className="me-3" href="#pricing">
-            <FaEnvelope color="black" />
-          </Nav.Link>
-          {/* <NavDropdown
+    //
+    <div className="header">
+      <Navbar
+        style={{ fontSize: "16pt" }}
+        collapseOnSelect
+        expand="lg"
+        className="bg-body-tertiary"
+      >
+        <div className="logo">
+          <Navbar.Brand className="m-3" href="/home">
+            Mindx
+          </Navbar.Brand>
+        </div>
+        <input placeholder="Search" className="search" />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/home">Trang chủ</Nav.Link>
+            <Nav.Link href="/profile">Trang cá nhân</Nav.Link>
+          </Nav>
+          <Nav>
+            <div className="notice">
+              <Nav.Link className="me-3" href="#features">
+                <FaBell color="black" />
+              </Nav.Link>
+            </div>
+            <div className="message">
+              <Nav.Link className="me-3" href="#pricing">
+                <FaEnvelope color="black" />
+              </Nav.Link>
+            </div>
+            {/* <NavDropdown
             title={
               <Avatar
                 size={30}
@@ -61,28 +69,33 @@ const Header = () => {
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">Đăng xuất</NavDropdown.Item>
           </NavDropdown> */}
-          <NavDropdown
-            title={
-              <Avatar
-                size={30}
-                icon={
-                  <img src="https://th.bing.com/th/id/OIP.NrKF5Z3xqRvxdPGgYjN7ggHaHa?w=151&h=180&c=7&r=0&o=5&dpr=2&pid=1.7" />
-                }
-              />
-            }
-            as={ButtonGroup}
-            key={"start"}
-            align={{ lg: "end" }}
-            id={`collapsible-nav-dropdown dropdown-button-drop-${"start"}`}
-            variant="secondary"
-          >
-            <NavDropdown.Item href="#action/3.1">Thông tin</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">Đăng xuất</NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+
+            <NavDropdown
+              title={
+                <Avatar
+                  size={30}
+                  icon={
+                    <img
+                      src="https://th.bing.com/th/id/OIP.NrKF5Z3xqRvxdPGgYjN7ggHaHa?w=151&h=180&c=7&r=0&o=5&dpr=2&pid=1.7"
+                      alt=""
+                    />
+                  }
+                />
+              }
+              as={ButtonGroup}
+              key={"start"}
+              align={{ lg: "end" }}
+              id={`collapsible-nav-dropdown dropdown-button-drop-${"start"}`}
+              variant="secondary"
+            >
+              <NavDropdown.Item href="#action/3.1">Thông tin</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">Đăng xuất</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
   );
 };
 export default Header;

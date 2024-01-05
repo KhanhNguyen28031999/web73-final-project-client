@@ -3,6 +3,8 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { FaPen } from "react-icons/fa";
 
+import "../style.css";
+
 import PostCreation from "../../../components/posts/post-creation/postCreation.js";
 import PostItem from "../../../components/posts/postItem/index.js";
 import Pagination from "../../../components/paginations/index.js";
