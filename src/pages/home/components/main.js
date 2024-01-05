@@ -46,7 +46,6 @@ const MainPage = () => {
         <PostCreation setIsPostCreationVisible={setIsPostCreationVisible} />
       )}
       <div className="posts-container">
-        <h4>This is a posts</h4>
         <ul>
           {data.data.map((post) => (
             <PostItem key={post._id} post={post} />

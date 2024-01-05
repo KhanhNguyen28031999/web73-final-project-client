@@ -8,39 +8,41 @@ const PostCreation = ({ setIsPostCreationVisible }) => {
   const [content, setContent] = useState("");
   const [hashtags, setHashtags] = useState("");
 
-  const handleSubmit = (e) => {
-    if (!title || !content || !hashtags) {
-      alert("Bạn chưa điền đầy đủ các trường !");
-    } else {
-      setTitle("");
-      setHashtags("");
-      setContent("");
-      setIsVisible(false);
-      setIsPostCreationVisible(false);
-    }
-  };
+  // const handleSubmit = () => {
+  //   if (!title || !content || !hashtags) {
+  //     alert("Bạn chưa điền đầy đủ các trường !");
+  //     return;
+  //   } else {
+  //     setTitle("");
+  //     setHashtags("");
+  //     setContent("");
+  //     setIsVisible(false);
+  //     setIsPostCreationVisible(false);
+  //     handleCreatePost();
+  //   }
+  // };
 
-  const handleCreatePost = (e) => {
-    handleSubmit();
-    e.preventDefault();
+  const handleCreatePost = () => {
+    // handleSubmit();
     const newPost = {
       title: title,
-      hashtags: hashtags.split(","),
+      hashtags: hashtags,
       content: content,
-      author: "test",
     };
-
-    axios
-      .post("http://localhost:3001/posts", newPost)
-      .then(() => {
-        setTitle("");
-        setHashtags("");
-        setContent("");
-        console.log("Create a new post successful");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    axios.post("http://localhost:3001/posts", newPost).then(() => {
+      console.log("Create newpost completed");
+    });
+    // axios
+    //   .post("http://localhost:3001/posts", newPost)
+    //   .then(() => {
+    //     setTitle("");
+    //     setHashtags("");
+    //     setContent("");
+    //     console.log("Create a new post successful");
+    //   })
+    //   .catch((error) => {
+    //     console.log("API error:", error);
+    //   });
   };
   return (
     <div className="post-creation" style={isVisible ? {} : { display: "none" }}>
