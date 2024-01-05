@@ -3,25 +3,36 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 .body-profile {
   padding-top: 24px;
 }
+
 .profile-navigator {
   margin: 0 auto;
+  margin-top: 50px;
   width: 20%;
+  height: 80vh;
 }
+
+
 .profiles-container {
   display: flex;
-  flex-direction: row; /* Sắp xếp các thành phần theo chiều dọc */
-  justify-content: space-between; /* Chia đều khoảng cách giữa các thành phần */
+  flex-direction: row;
+  /* Sắp xếp các thành phần theo chiều dọc */
+  justify-content: space-between;
+  /* Chia đều khoảng cách giữa các thành phần */
 }
 
 .profile-avatar {
   width: 168px;
   height: 168px;
-  border-radius: 50%; /* Tạo viền tròn */
-  border: 1px solid #ccc; /* Thêm viền màu xám */
-  margin-bottom: 28px; /* Khoảng cách dưới avatar */
+  border-radius: 50%;
+  /* Tạo viền tròn */
+  border: 1px solid #ccc;
+  /* Thêm viền màu xám */
+  margin-bottom: 28px;
+  /* Khoảng cách dưới avatar */
   margin: 0 auto;
 }
 
@@ -32,47 +43,63 @@
 }
 
 .profile-information div {
-  font-size: 12px; /* Kích thước chữ chung cho các div */
+  font-size: 20pt;
+  /* Kích thước chữ chung cho các div */
 }
 
 .profile-information div:first-child {
-  font-size: 14px; /* Kích thước chữ lớn hơn cho div đầu tiên (Your name) */
-  font-weight: bold; /* Tăng độ đậm cho div đầu tiên */
+  font-size: 30pt;
+  /* Kích thước chữ lớn hơn cho div đầu tiên (Your name) */
+  font-weight: bold;
+  /* Tăng độ đậm cho div đầu tiên */
 }
 
 .profile-navigation {
-  padding-top: 24px; /* Khoảng cách trên cùng */
-  border: 1px solid #ccc; /* Thêm viền màu xám */
-  border-radius: 15px; /* Tạo viền tròn với bán kính 15px */
+  padding-top: 24px;
+  /* Khoảng cách trên cùng */
+  border: 1px solid #ccc;
+  /* Thêm viền màu xám */
+  border-radius: 15px;
+  /* Tạo viền tròn với bán kính 15px */
   padding-bottom: 100px;
   padding-left: 12px;
 }
+
 .profile-navigation div {
-  display: flex; /* Sắp xếp các thành phần theo hàng ngang */
-  justify-content: space-between; /* Chia đều khoảng cách giữa các thành phần */
+  display: flex;
+  /* Sắp xếp các thành phần theo hàng ngang */
+  justify-content: space-between;
+  /* Chia đều khoảng cách giữa các thành phần */
 }
 
 .profile-main {
-  width: 77%; /* Chiều rộng của profile-main */
+  width: 77%;
+  /* Chiều rộng của profile-main */
 }
 
 .profile-status {
   display: flex;
-  flex-wrap: wrap; /* Cho phép các thành phần xếp thành nhiều hàng */
-  justify-content: space-between; /* Chia đều khoảng cách giữa các thành phần */
+  flex-wrap: wrap;
+  /* Cho phép các thành phần xếp thành nhiều hàng */
+  justify-content: space-between;
+  /* Chia đều khoảng cách giữa các thành phần */
 }
 
 .profile-status div {
-  width: 200px; /* Chiều rộng của mỗi ô vuông */
-  margin: 10px; /* Khoảng cách giữa các ô vuông */
+  width: 200px;
+  /* Chiều rộng của mỗi ô vuông */
+  margin: 10px;
+  /* Khoảng cách giữa các ô vuông */
 }
 
 .profile-post {
-  margin-top: 15px; /* Khoảng cách giữa profile-status và profile-post */
+  margin-top: 15px;
+  /* Khoảng cách giữa profile-status và profile-post */
 }
 
 .profiles-container {
-  border-right: 1px solid #ccc; /* Tạo đường dọc phân cách profile-navigator và profile-main */
+  border-right: 1px solid #ccc;
+  /* Tạo đường dọc phân cách profile-navigator và profile-main */
 }
 
 .profile-main {
@@ -82,10 +109,14 @@
 .profile-status {
   padding-left: 32px;
 }
+
 .profile-status div {
-  width: 20%; /* Chiều rộng của mỗi ô vuông */
+  width: 20%;
+  /* Chiều rộng của mỗi ô vuông */
   padding: 60px;
-  border: 1px solid #ccc; /* Thêm viền màu xám */
+  border: 1px solid #ccc;
+  /* Thêm viền màu xám */
   border-radius: 30px;
-  margin: 5px; /* Khoảng cách giữa các ô vuông */
+  margin: 5px;
+  /* Khoảng cách giữa các ô vuông */
 }
