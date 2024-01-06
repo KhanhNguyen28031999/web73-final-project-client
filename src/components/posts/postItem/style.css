@@ -21,5 +21,15 @@
 
 .post-item p:nth-child(3),
 .post-item p:nth-child(4) {
-  text-align: left; /* Căn lề trái cho tác giả và hashtag */
+  text-align: left;
+}
+.menu-icon {
+  float: right;
+  cursor: pointer;
+}
+.menu-icon:hover {
+  color: #719aeb;
+}
+.demo {
+  float: right;
 }
