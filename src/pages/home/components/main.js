@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { FaPen } from "react-icons/fa";
+import { Button, Modal } from "antd";
 
 import "../style.css";
 
@@ -12,6 +13,10 @@ import Pagination from "../../../components/paginations/index.js";
 const MainPage = () => {
   const [isPostCreationVisible, setIsPostCreationVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
   const handleCreatePost = () => {
     setIsPostCreationVisible(!isPostCreationVisible);
@@ -36,17 +41,16 @@ const MainPage = () => {
 
   return (
     <div>
-      <button
-        type="primary"
-        className="create-post-button"
-        title="Thêm bài viết"
-        onClick={handleCreatePost}
-      >
+      <button type="primary" className="create-post-button" onClick={showModal}>
         <FaPen />
       </button>
-      {isPostCreationVisible && (
-        <PostCreation setIsPostCreationVisible={setIsPostCreationVisible} />
-      )}
+      <Modal
+        open={isModalOpen}
+        onOk={() => setIsModalOpen(false)}
+        onCancel={() => setIsModalOpen(false)}
+      >
+        <PostCreation setIsModalOpen={setIsModalOpen} />
+      </Modal>
       <div className="posts-container">
         <ul>
           {data.data.map((post) => (

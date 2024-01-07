@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./style.css";
 import axios from "axios";
 
-const PostCreation = ({ setIsPostCreationVisible }) => {
+const PostCreation = ({ setIsModalOpen }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -17,7 +17,7 @@ const PostCreation = ({ setIsPostCreationVisible }) => {
       setHashtags("");
       setContent("");
       setIsVisible(false);
-      setIsPostCreationVisible(false);
+      setIsModalOpen(false);
     }
   };
 
@@ -46,13 +46,7 @@ const PostCreation = ({ setIsPostCreationVisible }) => {
       });
   };
   return (
-    <div className="post-creation" style={isVisible ? {} : { display: "none" }}>
-      <span
-        className="close-button"
-        onClick={() => setIsPostCreationVisible(false)}
-      >
-        X
-      </span>
+    <div className="post-creation">
       <h4>Hãy đăng tải trạng thái của bạn</h4>
       <input
         id="title"

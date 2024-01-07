@@ -7,11 +7,9 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 70%;
+  width: 100%;
   gap: 1rem;
   padding: 1rem;
-  border: 5px solid #293dc1;
-  border-radius: 8px;
   font-family: sans-serif;
   color: #333;
 }

@@ -54,3 +54,6 @@
 .create-post-button:hover {
   background-color: #29d4c3;
 }
+.ant-modal-footer {
+  display: none;
+}
