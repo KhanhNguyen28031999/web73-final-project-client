@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { FaPen } from "react-icons/fa";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 
 import "../style.css";
 
