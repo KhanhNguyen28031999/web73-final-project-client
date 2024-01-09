@@ -7,8 +7,8 @@
 .header {
   display: flex;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #719aeb;
+  /* padding: 10px 20px; */
+  /* background-color: #719aeb; */
   border-bottom: 1px solid #e5e5e5;
 }
 
@@ -62,7 +62,7 @@
   color: #000080;
 }
 
-.nav-link:hover > a {
+.nav-link:hover>a {
   color: #000080;
 }
 

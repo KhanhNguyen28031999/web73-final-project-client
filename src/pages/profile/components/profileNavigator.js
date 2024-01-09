@@ -3,7 +3,7 @@ import "../style.css";
 import { UserOutlined } from "@ant-design/icons";
 import { Divider, Menu, Avatar, Space } from "antd";
 
-const ProfileNavigator = ({ setPage }) => {
+const ProfileNavigator = ({ page, setPage }) => {
   const items = [
     { label: "Profile", key: "1" },
     { label: "Posts", key: "2" },
@@ -16,7 +16,7 @@ const ProfileNavigator = ({ setPage }) => {
     setPage(key);
   };
   return (
-    <div className="profile-navigator">
+    <div className="profile-navigator" style={{ textAlign: "center" }}>
       {/* <div className="profile-avatar">Your avatar</div> */}
       <Space wrap size={16}>
         <Avatar
@@ -26,7 +26,7 @@ const ProfileNavigator = ({ setPage }) => {
           }
         />
       </Space>
-      <div className="profile-information">
+      <div className="profile-information" style={{ textAlign: "center" }}>
         <div>Your name</div>
         <div>Your address</div>
       </div>
@@ -43,7 +43,7 @@ const ProfileNavigator = ({ setPage }) => {
       <br />
       <Menu
         onClick={(e) => handleSetPage(e.key)}
-        defaultSelectedKeys={["1"]}
+        defaultSelectedKeys={[page]}
         style={{
           fontSize: "18pt",
         }}

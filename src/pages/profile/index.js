@@ -14,7 +14,7 @@ const Profile = () => {
 
   switch (page) {
     case "1":
-      pageContent = <ProfileMain />;
+      pageContent = <ProfileMain setPage={setPage} />;
       break;
 
     case "2":
@@ -40,7 +40,7 @@ const Profile = () => {
       <Header style={{ margin: 0, padding: 0 }} />
       <div className="body-profile">
         <div className="profiles-container">
-          <ProfileNavigator setPage={setPage} />
+          <ProfileNavigator page={page} setPage={setPage} />
           {pageContent}
         </div>
       </div>

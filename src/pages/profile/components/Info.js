@@ -25,7 +25,7 @@ function Info() {
     },
   };
   return (
-    <div className="profile-main">
+    <div className="profile-main" style={{ textAlign: "center" }}>
       <Container>
         <Card>
           <Flex style={{ height: "15vh" }} align="flex-end" justify="flex-end">
@@ -52,7 +52,7 @@ function Info() {
         </Flex>
         <Form layout="vertical">
           <Form.Item label="Name" required tooltip="This is a required field">
-            <Input placeholder="input placeholder" />
+            <Input size="large" placeholder="input placeholder" />
           </Form.Item>
           <Form.Item
             label="Address"
@@ -62,13 +62,15 @@ function Info() {
               icon: <InfoCircleOutlined />,
             }}
           >
-            <Input placeholder="input placeholder" />
+            <Input size="large" placeholder="input placeholder" />
           </Form.Item>
           <Form.Item label="Bio">
             <TextArea rows={4} />
           </Form.Item>
           <Form.Item>
-            <Button type="primary">Save</Button>
+            <Button size="large" type="primary">
+              Save
+            </Button>
           </Form.Item>
         </Form>
       </Container>

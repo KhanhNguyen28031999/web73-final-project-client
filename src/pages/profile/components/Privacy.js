@@ -97,7 +97,7 @@ function Privacy() {
             </Col>
           ))}
         </Row>
-        <div>
+        <div style={{ textAlign: "center" }}>
           <Link style={{ fontSize: "20pt" }}>Load more</Link>
         </div>
       </Container>
