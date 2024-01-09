@@ -3,8 +3,11 @@ import "../style.css";
 import { Card, Col, Row, Flex } from "antd";
 import { Container } from "react-bootstrap";
 
-const ProfileMain = () => {
+const ProfileMain = ({ setPage }) => {
   const a = [1, 2, 3];
+  const handleSetPage = (key) => {
+    setPage(key);
+  };
   return (
     <div className="profile-main">
       {/* <div className="profile-status">
@@ -49,7 +52,9 @@ const ProfileMain = () => {
       <Container>
         <Flex justify={"space-between"} className="m-5">
           <h3>Recent Posts</h3>
-          <a href="#posts">View all {">>"}</a>
+          <span href="" onClick={(e) => handleSetPage("2")}>
+            View all {">>"}
+          </span>
         </Flex>
         <Row>
           {a.map((el, index) => (

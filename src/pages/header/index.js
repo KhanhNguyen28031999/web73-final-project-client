@@ -45,12 +45,12 @@ const Header = () => {
           </Nav>
           <Nav>
             <div className="notice">
-              <Nav.Link className="me-3" href="#features">
+              <Nav.Link className="me-3" href="/notification">
                 <FaBell color="black" />
               </Nav.Link>
             </div>
             <div className="message">
-              <Nav.Link className="me-3" href="#pricing">
+              <Nav.Link className="me-3" href="/message">
                 <FaEnvelope color="black" />
               </Nav.Link>
             </div>
