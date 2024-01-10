@@ -11,15 +11,10 @@ import PostItem from "../../../components/posts/postItem/index.js";
 import Pagination from "../../../components/paginations/index.js";
 
 const MainPage = () => {
-  const [isPostCreationVisible, setIsPostCreationVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
-  };
-
-  const handleCreatePost = () => {
-    setIsPostCreationVisible(!isPostCreationVisible);
   };
 
   const packageSize = 5;

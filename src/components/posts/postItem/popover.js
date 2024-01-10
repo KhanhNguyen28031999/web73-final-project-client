@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Popover, ConfigProvider } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+import { EllipsisOutlined } from "@ant-design/icons";
 
 const content = (
   <div>
@@ -22,7 +22,7 @@ const PopOver = () => (
       <div style={{ width: buttonWidth, float: "inline-start" }}>
         <Popover placement="rightTop" content={content}>
           <Button>
-            <MenuOutlined />
+            <EllipsisOutlined />
           </Button>
         </Popover>
       </div>
