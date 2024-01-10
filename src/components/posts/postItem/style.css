@@ -23,6 +23,11 @@
 .post-item p:nth-child(4) {
   text-align: left;
 }
+.post-interface {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .menu-icon {
   float: right;
   cursor: pointer;

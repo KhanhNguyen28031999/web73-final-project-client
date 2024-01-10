@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { FaPen } from "react-icons/fa";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 
 import "../style.css";
 
@@ -11,15 +11,10 @@ import PostItem from "../../../components/posts/postItem/index.js";
 import Pagination from "../../../components/paginations/index.js";
 
 const MainPage = () => {
-  const [isPostCreationVisible, setIsPostCreationVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
-  };
-
-  const handleCreatePost = () => {
-    setIsPostCreationVisible(!isPostCreationVisible);
   };
 
   const packageSize = 5;

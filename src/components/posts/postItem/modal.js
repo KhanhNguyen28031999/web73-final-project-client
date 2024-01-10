@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
 
-const ModalPost = () => {
+const Modals = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -26,6 +26,7 @@ const ModalPost = () => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        width={1000}
       >
         <p>Some contents...</p>
         <p>Some contents...</p>
@@ -35,4 +36,4 @@ const ModalPost = () => {
   );
 };
 
-export default ModalPost;
+export default Modals;
