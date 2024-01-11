@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Flex, message, Upload, Button, Avatar, Form, Input } from "antd";
 import { Container } from "react-bootstrap";
 import "../style.css";
@@ -7,6 +7,9 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 const { TextArea } = Input;
 
 function Info() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const props = {
     name: "file",
     action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
@@ -23,6 +26,25 @@ function Info() {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
+  };
+  const changeInfo = () => {
+    var data = new URLSearchParams();
+    data.append("name", name);
+    data.append("email", email);
+    data.append("phonenumber", phone);
+    fetch("http://localhost:3001/users/info", {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.check === true) {
+          window.location.reload();
+        }
+      });
   };
   return (
     <div className="profile-main" style={{ textAlign: "center" }}>
@@ -52,23 +74,32 @@ function Info() {
         </Flex>
         <Form layout="vertical">
           <Form.Item label="Name" required tooltip="This is a required field">
-            <Input size="large" placeholder="input placeholder" />
+            <Input
+              size="large"
+              onChange={(e) => setName(e.target.value)}
+              placeholder="input placeholder"
+            />
+          </Form.Item>
+          <Form.Item label="Email" required tooltip="This is a required field">
+            <Input
+              size="large"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="input placeholder"
+            />
           </Form.Item>
           <Form.Item
-            label="Address"
+            label="Phone number"
             required
-            tooltip={{
-              title: "Tooltip with customize icon",
-              icon: <InfoCircleOutlined />,
-            }}
+            tooltip="This is a required field"
           >
-            <Input size="large" placeholder="input placeholder" />
-          </Form.Item>
-          <Form.Item label="Bio">
-            <TextArea rows={4} />
+            <Input
+              size="large"
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="input placeholder"
+            />
           </Form.Item>
           <Form.Item>
-            <Button size="large" type="primary">
+            <Button onClick={() => changeInfo()} size="large" type="primary">
               Save
             </Button>
           </Form.Item>
