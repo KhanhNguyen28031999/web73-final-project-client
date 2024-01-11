@@ -12,76 +12,82 @@ function Notification() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    fetch(fakeDataUrl)
+    fetch("http://localhost:3001/messages/id", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setInitLoading(false);
-        setData(res.results);
-        setList(res.results);
+        setData(res.data);
+        setList(res.data);
       });
   }, []);
-  const count = 10;
-  const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat,picture&noinfo`;
+  // const count = 10;
+  // const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat,picture&noinfo`;
 
-  const onLoadMore = () => {
-    setLoading(true);
-    setList(
-      data.concat(
-        [...new Array(count)].map(() => ({
-          loading: true,
-          name: {},
-          picture: {},
-        }))
-      )
-    );
-    fetch(fakeDataUrl)
-      .then((res) => res.json())
-      .then((res) => {
-        const newData = data.concat(res.results);
-        setData(newData);
-        setList(newData);
-        setLoading(false);
-        window.dispatchEvent(new Event("resize"));
-      });
-  };
-  const loadMore =
-    !initLoading && !loading ? (
-      <div
-        style={{
-          textAlign: "center",
-          marginTop: 12,
-          height: 32,
-          lineHeight: "32px",
-        }}
-      >
-        <Button onClick={onLoadMore}>loading more</Button>
-      </div>
-    ) : null;
-
-  const all = (
-    <List
-      size="large"
-      className="demo-loadmore-list"
-      loading={initLoading}
-      itemLayout="horizontal"
-      loadMore={loadMore}
-      dataSource={list}
-      renderItem={(item) => (
-        <List.Item
-          actions={[<a key="list-loadmore-edit">Đánh dấu là đã đọc</a>]}
-        >
-          <Skeleton avatar title={false} loading={item.loading} active>
+  // const onLoadMore = () => {
+  //   setLoading(true);
+  //   setList(
+  //     data.concat(
+  //       [...new Array(count)].map(() => ({
+  //         loading: true,
+  //         name: {},
+  //         picture: {},
+  //       }))
+  //     )
+  //   );
+  //   fetch(fakeDataUrl)
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       const newData = data.concat(res.results);
+  //       setData(newData);
+  //       setList(newData);
+  //       setLoading(false);
+  //       window.dispatchEvent(new Event("resize"));
+  //     });
+  // };
+  // const loadMore =
+  //   !initLoading && !loading ? (
+  //     <div
+  //       style={{
+  //         textAlign: "center",
+  //         marginTop: 12,
+  //         height: 32,
+  //         lineHeight: "32px",
+  //       }}
+  //     >
+  //       <Button onClick={onLoadMore}>loading more</Button>
+  //     </div>
+  //   ) : null;
+  const all =
+    list.length > 0 ? (
+      <List
+        size="large"
+        className="demo-loadmore-list"
+        loading={initLoading}
+        itemLayout="horizontal"
+        dataSource={list}
+        renderItem={(item) => (
+          <List.Item
+            actions={[<a key="list-loadmore-edit">Đánh dấu là đã đọc</a>]}
+          >
+            {/* <Skeleton avatar title={false} active> */}
             <List.Item.Meta
-              avatar={<Avatar src={item.picture.large} />}
-              title={<a href="https://ant.design">{item.name?.last}</a>}
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+              avatar={<Avatar src={item.author.image} />}
+              title={<a href="https://ant.design">{item.author.name}</a>}
+              description={item.content}
             />
-            <div>{Date.now()}</div>
-          </Skeleton>
-        </List.Item>
-      )}
-    />
-  );
+            <div>{item.createAt}</div>
+            {/* </Skeleton> */}
+          </List.Item>
+        )}
+      />
+    ) : (
+      <></>
+    );
   return (
     <div>
       <Header />
