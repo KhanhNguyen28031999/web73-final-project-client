@@ -2,10 +2,29 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-function PostDetail() {
-  const { postId } = useParams();
+import Comment from "../postItem/comment";
+
+function PostDetail({ username }) {
   const [post, setPost] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [comments, setComments] = useState([]);
+
+  const { postId } = useParams();
+
+  const fetchComments = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/comments/${postId}`
+      );
+      setComments(response.data.data);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, [comments]);
 
   useEffect(() => {
     const getPostDetail = () => {
@@ -33,10 +52,28 @@ function PostDetail() {
           <h3>Title: {post.title}</h3>
           <p>{post.content}</p>
           <p>Author: {post.author}</p>
-          <p>Hashtag: {post.hashtags ? `#${post.hashtags.join("#")}` : ""}</p>
-
+          <p>
+            Hashtag:{" "}
+            {post.hashtags
+              .split(",")
+              .map((tag) => "#" + tag.trim())
+              .join(" ")}
+          </p>{" "}
           <button>Edit</button>
           <button>Delete</button>
+          <div className="comment-section">
+            <Comment postId={postId} />
+            {comments.length > 0 ? (
+              comments.map((comment) => (
+                <div key={comment._id}>
+                  <p>{comment.author}</p>
+                  <p>{comment.content}</p>
+                </div>
+              ))
+            ) : (
+              <div>Chưa có bình luận mới.</div>
+            )}
+          </div>
         </div>
       )}
     </div>
