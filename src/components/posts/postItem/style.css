@@ -1,0 +1,40 @@
+.post-item {
+  border: Ridge 3px #719aeb;
+  border-radius: 15px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 0 8px #000;
+}
+
+.post-item h4 {
+  text-align: center; /* Căn lề chính giữa cho tiêu đề */
+  padding-bottom: 12px; /* Thêm khoảng cách giữa tiêu đề và nội dung */
+}
+
+.post-item p {
+  text-align: justify; /* Căn lề hai bên cho nội dung */
+}
+.post-item p:nth-child(2) {
+  border-bottom: 2px solid rgb(199, 199, 214);
+  border-spacing: 15px;
+}
+
+.post-item p:nth-child(3),
+.post-item p:nth-child(4) {
+  text-align: left;
+}
+.post-interface {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.menu-icon {
+  float: right;
+  cursor: pointer;
+}
+.menu-icon:hover {
+  color: #719aeb;
+}
+.demo {
+  float: right;
+}

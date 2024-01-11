@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.home-page-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 3rem; /* Sử dụng rem cho padding */
+}
+
+.page-body {
+  width: 82%;
+}
+
+.friends-list {
+  width: 15%;
+}
+
+.home-page-body,
+.page-body,
+.friends-list {
+  border: none;
+}
+
+.page-body,
+.friends-list {
+  border-right: 2px solid #eee;
+  height: 1000px;
+}
+.create-post-button {
+  background-color: #293dc1;
+  border: none;
+  border-radius: 50%;
+  padding: 20px 30px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 80px;
+  right: 80px;
+  z-index: 999;
+  box-shadow:
+    0 0 5px rgba(0, 0, 0, 0.2),
+    0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.create-post-button > svg {
+  margin-left: -5px;
+}
+
+.create-post-button:hover {
+  background-color: #29d4c3;
+}
+.ant-modal-footer {
+  display: none;
+}
