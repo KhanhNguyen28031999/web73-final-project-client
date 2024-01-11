@@ -25,13 +25,16 @@ const Comment = ({ postId }) => {
   };
   return (
     <div>
-      <div>
+      <div className="comment">
         <input
+          className="comment-input"
           placeholder="Bình luận ..."
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        <button onClick={handleSubmit}>Gửi</button>
+        <button className="comment-button" onClick={handleSubmit}>
+          Gửi
+        </button>
       </div>
     </div>
   );
