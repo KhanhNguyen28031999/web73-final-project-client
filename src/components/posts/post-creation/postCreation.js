@@ -3,7 +3,7 @@ import "./style.css";
 import axios from "axios";
 
 const PostCreation = ({ setIsModalOpen }) => {
-  const [isVisible, setIsVisible] = useState(true);
+  // const [isVisible, setIsVisible] = useState(true);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [hashtags, setHashtags] = useState("");
@@ -16,7 +16,7 @@ const PostCreation = ({ setIsModalOpen }) => {
       setTitle("");
       setHashtags("");
       setContent("");
-      setIsVisible(false);
+      // setIsVisible(false);
       setIsModalOpen(false);
     }
   };
@@ -39,11 +39,8 @@ const PostCreation = ({ setIsModalOpen }) => {
         setTitle("");
         setHashtags("");
         setContent("");
-        console.log("Create a new post successful");
       })
-      .catch((error) => {
-        console.log("API error:", error);
-      });
+      .catch((error) => {});
   };
   return (
     <div className="post-creation">

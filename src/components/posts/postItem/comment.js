@@ -1,34 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Comment = () => {
-  const [comment, setComment] = useState("");
-
-  const handleSubmit = () => {
-    axios
-      .post("http://localhost:3001/comments", {
-        comment: comment,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
+const Comment = ({ postId }) => {
+  const [content, setContent] = useState("");
+  const handleSubmit = async () => {
+    if (!content) {
+      return;
+    }
+    const newComment = {
+      postId,
+      content: content,
+    };
+    try {
+      await axios.post("http://localhost:3001/comments", newComment, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
       });
+      setContent("");
+    } catch (error) {
+      console.error("Error posting comment:", error);
+    }
   };
-
   return (
     <div>
       <div>
         <input
           placeholder="Bình luận ..."
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
         <button onClick={handleSubmit}>Gửi</button>
       </div>
-      <div>Danh sách bình luận</div>
     </div>
   );
 };
+
 export default Comment;
