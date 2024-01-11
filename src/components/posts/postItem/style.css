@@ -38,3 +38,24 @@
 .demo {
   float: right;
 }
+.comment-input {
+  width: 90%; /* Chiều rộng full */
+  padding: 10px 15px; /* Padding xung quanh */
+  border: 1px solid #ccc; /* Border màu xám nhạt */
+  border-radius: 5px; /* Bo tròn góc */
+  font-size: 16px; /* Kích thước chữ */
+  margin-right: 10px; /* Khoảng cách với button */
+}
+
+.comment-button {
+  background-color: #007bff; /* Màu nền xanh lá */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Bỏ border */
+  padding: 10px 20px; /* Tạo padding */
+  border-radius: 5px; /* Bo tròn góc */
+  cursor: pointer; /* Hiển thị con trỏ chuột khi hover */
+}
+
+.comment-button:hover {
+  background-color: #0069d9; /* Thay đổi màu nền khi hover */
+}
