@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.logoF {
+  font-weight: 600;
+  font-size: 2rem;
+  margin-right: auto;
+  color: rgb(255, 255, 255);
+}
+.XF {
+  color: black;
+  font-weight: 1000;
+  font-size: 40px;
+  padding-right: 15px;
+}
+.footer {
+  padding: 8px;
+  background-color: #1874ee;
+  text-align: center;
+}

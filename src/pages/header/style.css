@@ -7,15 +7,25 @@
 .header {
   display: flex;
   align-items: center;
-  /* padding: 10px 20px; */
-  /* background-color: #719aeb; */
   border-bottom: 1px solid #e5e5e5;
+}
+.navbar-menu {
+  background-color: #1876f2;
+  display: flex;
+  width: 100%;
 }
 
 .logo {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.5rem;
   margin-right: auto;
+  color: white;
+}
+.X {
+  color: black;
+  font-weight: 1000;
+  font-size: 30px;
+  padding-right: 15px;
 }
 
 .search {
@@ -56,13 +66,19 @@
 .me-auto {
   font-size: large;
 }
+.menu111 {
+  color: white;
+  padding-right: 25px;
+  margin-right: 10px;
+  font-weight: 600;
+}
 
 .nav-link:hover {
   background-color: #ccc;
   color: #000080;
 }
 
-.nav-link:hover>a {
+.nav-link:hover > a {
   color: #000080;
 }
 
@@ -95,4 +111,9 @@
 
 .bg-body-tertiary {
   width: 100%;
+}
+
+.name {
+  font-size: medium;
+  color: white;
 }

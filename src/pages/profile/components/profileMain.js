@@ -1,12 +1,43 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
 import "../style.css";
 import { Card, Col, Row, Flex } from "antd";
 import { Container } from "react-bootstrap";
 
 const ProfileMain = ({ setPage }) => {
-  const a = [0, 1, 2];
   const [temp, setTemp] = useState({});
+
   const [temp1, setTemp1] = useState([]);
+
+  const [user, setUser] = useState({});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const storedToken = localStorage.getItem("token");
+
+        if (storedToken) {
+          const response = await axios.get(`http://localhost:3001/auth/me`, {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const userData = response.data.user;
+          setUser(userData);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleSetPage = (key) => {
     setPage(key);
   };
@@ -21,7 +52,7 @@ const ProfileMain = ({ setPage }) => {
       .then((res) => {
         setTemp(res.data);
       });
-    fetch("http://localhost:3001/posts", {
+    fetch(`http://localhost:3001/posts?author=${user._id}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -35,51 +66,46 @@ const ProfileMain = ({ setPage }) => {
   useEffect(() => {
     loadData();
   }, []);
+
   return (
     <div className="profile-main">
-      {/* <div className="profile-status">
-        <div>Box 1</div>
-        <div>Box 2</div>
-        <div>Box 3</div>
-        <div>Box 4</div>
-      </div> */}
       <Container>
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col className="gutter-row" span={6}>
             <Card style={{ textAlign: "center" }}>
               <p>
                 <b style={{ fontSize: "30pt" }}>
-                  {temp.followers ? temp.followers : "Loading"}
+                  {temp.followers ? temp.followers : "0"}
                 </b>
               </p>
-              <p>followers</p>
+              <p>Followers</p>
             </Card>
           </Col>
           <Col className="gutter-row" span={6}>
             <Card style={{ textAlign: "center" }}>
               <p>
                 <b style={{ fontSize: "30pt" }}>
-                  {temp.posts ? temp.posts : "Loading"}
+                  {temp.posts ? temp.posts : "0"}
                 </b>
               </p>
-              <p>posts</p>
+              <p>Posts</p>
             </Card>
           </Col>
           <Col className="gutter-row" span={6}>
             <Card style={{ textAlign: "center" }}>
               <p>
                 <b style={{ fontSize: "30pt" }}>
-                  {temp.result ? temp.result.countComment.length : "Loading"}
+                  {temp.comments ? temp.comments : "0"}
                 </b>
               </p>
-              <p>comments</p>
+              <p>Comments</p>
             </Card>
           </Col>
           <Col className="gutter-row" span={6}>
             <Card style={{ textAlign: "center" }}>
               <p>
                 <b style={{ fontSize: "30pt" }}>
-                  {temp.result ? temp.result.countReaction.length : "Loading"}
+                  {temp.reactions ? temp.reactions : "0"}
                 </b>
               </p>
               <p>reactions</p>
@@ -87,29 +113,34 @@ const ProfileMain = ({ setPage }) => {
           </Col>
         </Row>
       </Container>
-      {/* <div className="profile-post">Your post</div> */}
       <Container>
         <Flex justify={"space-between"} className="m-5">
-          <h3>Recent Posts</h3>
-          <span href="" onClick={(e) => handleSetPage("2")}>
-            View all {">>"}
-          </span>
+          <h3>Bài viết bạn đã đăng : </h3>
         </Flex>
         <Row>
-          {a.map((el, index) => (
-            <Card
-              key={index}
-              className="mb-3"
-              style={{ textAlign: "left", width: "100%", fontSize: "13pt" }}
-            >
-              <p>{temp1[index] ? temp1[index].title : "Loading"}</p>
-              <p>
-                <span className="me-5">20 Likes </span>
-                <span>5 Comments</span>
-              </p>
-              <p>{temp1[index] ? temp1[index].hashtags : "Loading"}</p>
-            </Card>
-          ))}
+          {temp1.map((post, index) => {
+            if (post.author._id === user._id) {
+              return (
+                <Card
+                  key={index}
+                  className="mb-3"
+                  style={{ textAlign: "left", width: "100%", fontSize: "13pt" }}
+                >
+                  <p
+                    className="recent-post"
+                    onClick={() =>
+                      navigate(`/posts/${post._id}`, {
+                        state: { postdata: post },
+                      })
+                    }
+                  >
+                    {post.title}
+                  </p>
+                </Card>
+              );
+            }
+            return "";
+          })}
         </Row>
       </Container>
     </div>

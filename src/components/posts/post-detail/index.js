@@ -1,26 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 import axios from "axios";
 
 import "./style.css";
 
 import Comment from "../postItem/comment";
+import ReactionItem from "../postItem/reactions";
 
-function PostDetail() {
+const PostDetail = () => {
   const [post, setPost] = useState({});
+
   const [isLoading, setIsLoading] = useState(true);
   const [comments, setComments] = useState([]);
+
+  const [editComment, setEditComment] = useState("");
+  const [isEditComment, setIsEditComment] = useState(false);
+  const [editingCommentId, setEditingCommentId] = useState(null);
 
   const [isEditing, setIsEditing] = useState(false);
   const [updatedTitle, setUpdatedTitle] = useState("");
   const [updatedContent, setUpdatedContent] = useState("");
   const [updatedHashtags, setUpdatedHashtags] = useState("");
 
-  const [editingCommentId, setEditingCommentId] = useState("");
-  const [editingComment, setEditingComment] = useState("");
+  const [user, setUser] = useState({});
+
+  const location = useLocation();
+  const postdata = location.state?.postdata;
 
   const { postId } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const storedToken = localStorage.getItem("token");
+
+        if (storedToken) {
+          const response = await axios.get(`http://localhost:3001/auth/me`, {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const userData = response.data.user;
+          setUser(userData);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const fetchComments = async () => {
     try {
@@ -35,7 +68,7 @@ function PostDetail() {
 
   useEffect(() => {
     fetchComments();
-  }, [comments]);
+  }, [comments, post]);
 
   useEffect(() => {
     const getPostDetail = () => {
@@ -45,13 +78,14 @@ function PostDetail() {
           setPost(res.data.data);
           setIsLoading(false);
         })
+
         .catch((error) => {
           console.log(error);
           setIsLoading(false);
         });
     };
     getPostDetail();
-  }, []);
+  }, [postId]);
 
   const handleSave = async () => {
     try {
@@ -70,6 +104,7 @@ function PostDetail() {
           },
         }
       );
+
       console.log("Post updated successfully:", response.data.data);
       setPost(response.data.data);
 
@@ -113,7 +148,6 @@ function PostDetail() {
         }
       );
       console.log("Comment deleted successfully:", response.data);
-
       fetchComments();
     } catch (error) {
       console.error("Error deleting comment:", error);
@@ -121,36 +155,41 @@ function PostDetail() {
     }
   };
 
-  const handleSaveComment = async (event) => {
-    event.preventDefault();
+  // const handleEditComment = async (commentId) => {
+  //   const newComment = {
+  //     _id: commentId,
+  //     author: user.username,
+  //     content: editComment,
+  //   };
+  //   console.log("Sending comment update:", newComment);
 
-    const updatedContent = event.target.value;
+  //   const response = await axios.put(
+  //     `http://localhost:3001/comments/${commentId}`,
+  //     newComment,
+  //     {
+  //       headers: {
+  //         Accept: "application/json",
+  //         Authorization: "Bearer " + localStorage.getItem("token"),
+  //       },
+  //     }
+  //   );
 
-    if (updatedContent === editingComment.content) {
-      // Bình luận không thay đổi
-      return;
-    }
-
-    const updateComment = {
-      content: updatedContent,
-    };
-
-    const response = await axios.put(
-      `http://localhost:3001/comments/${editingCommentId}`,
-      updateComment,
-      {
-        headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
-
-    console.log("Comment updated successfully:", response.data.data);
-
-    setEditingCommentId("");
-    fetchComments();
-  };
+  //   if (response.status === 201) {
+  //     setComments((prevComments) => {
+  //       return prevComments.map((comment) => {
+  //         <li key={comment._id}>{comment.content}</li>;
+  //         if (comment._id === commentId) {
+  //           return response.data;
+  //         } else {
+  //           return comment;
+  //         }
+  //       });
+  //     });
+  //   } else {
+  //     console.error("Error updating comment:", response);
+  //     alert("Lỗi cập nhật bình luận. Vui lòng thử lại!");
+  //   }
+  // };
 
   return (
     <div className="post-detail">
@@ -158,33 +197,54 @@ function PostDetail() {
         <h4>Loading ...</h4>
       ) : (
         <div className="post-detail__1">
-          <h2>Post Detail</h2>
           {isEditing ? (
             <div className="post-detail__2">
               <input
-                placeholder="Title"
+                placeholder="Tiêu đề"
                 type="text"
                 value={updatedTitle}
                 onChange={(e) => setUpdatedTitle(e.target.value)}
               />
               <textarea
-                placeholder="Content"
+                placeholder="Nội dung ..."
                 value={updatedContent}
                 onChange={(e) => setUpdatedContent(e.target.value)}
               />
               <input
-                placeholder="hashtags"
+                placeholder="###Hashtags"
                 type="text"
                 value={updatedHashtags}
                 onChange={(e) => setUpdatedHashtags(e.target.value)}
               />
-              <button onClick={handleSave}>Save</button>
+              <div className="editpost-handle-button">
+                <button onClick={handleSave}>Lưu</button>
+                <button onClick={() => setIsEditing(false)}>Huỷ</button>
+              </div>
             </div>
           ) : (
             <div className="post-detail__3">
-              <h3>Title: {post.title}</h3>
+              <button
+                className="close-post-detail"
+                onClick={() => navigate("/home")}
+              >
+                X
+              </button>
+              <h3>{post.title}</h3>
               <p>{post.content}</p>
-              <p>Author: {post.author}</p>
+              <p
+                onClick={() => {
+                  if (postdata.author._id === user._id) {
+                    navigate("/profile");
+                  } else {
+                    navigate(`/profile/${postdata.author._id}`, {
+                      state: { postdata: postdata },
+                    });
+                  }
+                }}
+              >
+                Author:{" "}
+                <span className="post-author">{postdata.author.username}</span>
+              </p>
               <p>
                 Hashtag:{" "}
                 {post.hashtags
@@ -192,51 +252,116 @@ function PostDetail() {
                   .map((tag) => "#" + tag.trim())
                   .join(" ")}
               </p>{" "}
-              <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
-              <button onClick={handleDelete}>Delete</button>
+              <button
+                className={
+                  user._id === post.author
+                    ? "post-detail__3-button"
+                    : "is-hidden"
+                }
+                onClick={() => setIsEditing(!isEditing)}
+              >
+                Edit
+              </button>
+              <button
+                className={
+                  user._id === post.author
+                    ? "post-detail__3-button"
+                    : "is-hidden"
+                }
+                onClick={() => {
+                  if (window.confirm("Bạn chắc chắn muốn xóa bài viết này?")) {
+                    handleDelete();
+                  }
+                }}
+              >
+                Xóa
+              </button>
             </div>
           )}
+          <ReactionItem postId={postId} />
           <div className="comment-section">
-            <Comment postId={postId} />
+            <Comment postId={postId} comments={comments} />
             {comments.length > 0 ? (
               comments.map((comment) => (
                 <div key={comment._id}>
                   <div className="comment">
-                    <p>{comment.author}</p>
-                    <p>{comment.content}</p>
-                    {editingCommentId === comment._id ? (
-                      <form onSubmit={handleSaveComment}>
-                        <div className="form-group">
-                          <label htmlFor="content">Nội dung</label>
-                          <textarea
-                            id="content"
-                            name="content"
-                            className="form-control"
-                            value={editingComment.content}
-                            onChange={(e) =>
-                              setEditingComment({
-                                ...editingComment,
-                                content: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                        <button type="submit">Lưu</button>
-                      </form>
-                    ) : (
-                      <div className="post-detail__4">
-                        {/* <button
-                          onClick={() => setEditingCommentId(comment._id)}
-                        >
-                          Edit
-                        </button> */}
-                        <button
-                          onClick={() => handleDeleteComment(comment._id)}
-                        >
-                          Delete
+                    <div className="comment-avatar">
+                      <img
+                        src={user.avatar}
+                        width={30}
+                        height={30}
+                        style={{
+                          borderRadius: "50%",
+                        }}
+                      />
+                    </div>
+                    <div
+                      onClick={() => {
+                        if (comment.userId === user._id) {
+                          navigate("/profile");
+                        } else {
+                          navigate(`/profile/${comment._userId}`, {
+                            state: { postdata: comment },
+                          });
+                        }
+                      }}
+                      className="comment-author"
+                    >
+                      {comment.author} :{" "}
+                    </div>
+                    <div className="comment-content">{comment.content}</div>
+                    {/* {isEditComment && editingCommentId === comment._id ? (
+                      <div>
+                        <input
+                          type="text"
+                          placeholder="Nội dung"
+                          value={editComment}
+                          onChange={(e) => setEditComment(e.target.value)}
+                        ></input>
+                        <button onClick={() => handleEditComment(comment._id)}>
+                          Lưu
+                        </button>
+                        <button onClick={() => setIsEditComment(false)}>
+                          Huỷ
                         </button>
                       </div>
-                    )}
+                    ) : ( */}
+                    <div className="post-detail__4">
+                      <div>
+                        {/* <button
+                            className={
+                              user.username ===   
+                                ? "post-detail__4-button"
+                                : "is-hidden"
+                            }
+                            onClick={() => {
+                              setIsEditComment(true);
+                              setEditingCommentId(comment._id);
+                              setEditComment(comment.content);
+                            }}
+                          >
+                            Sửa
+                          </button> */}
+                        <button
+                          className={
+                            user.username === comment.author
+                              ? "post-detail__4-button"
+                              : "is-hidden"
+                          }
+                          onClick={() => {
+                            if (
+                              window.confirm(
+                                "Bạn chắc chắn muốn xóa bình luận này?"
+                              )
+                            ) {
+                              handleDeleteComment(comment._id);
+                            }
+                          }}
+                        >
+                          Xoá
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))
@@ -248,6 +373,18 @@ function PostDetail() {
       )}
     </div>
   );
-}
+};
 
 export default PostDetail;
+
+/* <button
+                          className={
+                            user.username === comment.author
+                              ? "post-detail__4-button"
+                              : "is-hidden"
+                          }
+                          onClick={() => {
+                            setIsEditComment(true);
+                            setEditingComment(comment.content);
+                          }}
+                        ></button> */

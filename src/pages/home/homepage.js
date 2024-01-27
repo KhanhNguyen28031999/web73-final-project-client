@@ -7,6 +7,8 @@ import "./style.css";
 
 import MainPage from "./components/main";
 import RightBar from "./components/rightbar";
+import LeftBar from "./components/leftbar";
+import Footer from "../footer";
 
 const Home = () => {
   return (
@@ -17,13 +19,10 @@ const Home = () => {
           <div className="page-body">
             <MainPage />
           </div>
-          <div className="friends-list">
-            <RightBar />
-          </div>
         </div>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

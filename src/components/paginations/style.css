@@ -1,0 +1,39 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.pagination {
+  display: flex;
+  width: 100%;
+  padding: 8px;
+  padding-top: 35px;
+  justify-content: center;
+  align-items: center;
+  color: rgb(171, 167, 167);
+  font-size: 16px;
+  font-weight: 500;
+}
+.previous {
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 8px;
+  background-color: #1876f2;
+  color: white;
+  border-color: transparent;
+}
+.previous1 {
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 8px;
+  color: black;
+}
+.next {
+  padding: 5px;
+  border-radius: 5px;
+  margin-left: 8px;
+  background-color: #1876f2;
+  color: white;
+  border-color: transparent;
+}

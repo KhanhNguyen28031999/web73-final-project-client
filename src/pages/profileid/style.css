@@ -1,0 +1,141 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.profileid-main {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileid-main--inform {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 8px 8px 8px;
+}
+
+.inform-name {
+  font-size: 50px;
+  font-weight: 500;
+}
+.inform-phone {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.profileid-data {
+  padding: 12px;
+  width: 30%;
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 1px solid gray;
+  font-size: 30px;
+}
+
+.profileid-data div {
+  border: 1px solid gray;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.profileid-interactive {
+  display: flex;
+  width: 25%;
+  justify-content: space-evenly;
+  padding: 12px;
+}
+
+.profileid-interactive div {
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.profileid-interactive :first-child {
+  background-color: rgb(70, 70, 226);
+  color: white;
+}
+.profileid-interactive :first-child:hover {
+  background-color: rgb(23, 23, 104);
+}
+.profileid-interactive :nth-child(2) {
+  background-color: rgb(80, 114, 30);
+  color: white;
+}
+.profileid-interactive :nth-child(2):hover {
+  background-color: rgb(44, 60, 6);
+}
+
+.profileid-interactive :nth-child(3) {
+  background-color: red;
+  color: white;
+}
+.profileid-interactive :nth-child(3):hover {
+  background-color: rgb(111, 12, 12);
+}
+
+.profileid-main--image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 100px;
+}
+
+.image-cover {
+  width: 100%;
+  height: 300px;
+  background-color: aquamarine;
+  border-radius: 8px;
+}
+
+.image-avatar {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-top: 220px;
+}
+
+.profileid-post {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 5px;
+  row-gap: 12px;
+}
+.post-profile {
+  padding: 12px;
+  border: 1px dashed gray;
+  border-radius: 8px;
+}
+
+.postid-more {
+  padding-left: 5px;
+  color: rgb(30, 34, 160);
+  cursor: pointer;
+}
+
+.postid-more:hover {
+  font-style: italic;
+  text-decoration: underline;
+}
+.profile-follow {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.profile-follow1 {
+  margin-top: 12px;
+  padding-top: 10px;
+}

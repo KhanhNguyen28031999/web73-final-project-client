@@ -1,51 +1,56 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 .auth-page {
-    /* background-image: url("../../assets/image/hinh-nen-anime-ve-phong-canh-cuc-dep-07-22-55-52.jpg"); */
-    background-size: cover; 
-    background-position: center; 
-    height: 950px;
-    padding-top: 200px;
-  }
-
-.form-login{
-    margin: 0 auto;
-    width: 50%;
-    padding: 64px 35px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
-.form-auth{
-    margin: 0 auto;
+.auth-page-name {
+  background-color: rgb(106, 106, 242);
+  padding: 24px;
+  text-align: left;
+  color: whitesmoke;
 }
-.auth-page-form{
 
-    margin : 0 auto;
-    width: 20%;
-    height: 400px;
-    padding-top: 12px;
-    padding-bottom: 12px;
+.form-login {
+  margin: 0 auto;
+  width: 50%;
+  padding: 64px 35px;
 }
-.form{
-    padding-top: 10px;
-    padding-bottom: 10px;
+
+.form-auth {
+  margin: 0 auto;
 }
-.button-form{
-    width: 100px;
-    padding: 5px;
-    margin: 0 auto;
+.auth-page-form {
+  margin: 0 auto;
+  width: 20%;
+
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
-.form-login-text{
-    font-size: 30px;
-    font-weight: 500;
-    padding-right: 50px;
+.form {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-.text2{
-    padding-right: 40px;
-    font-size: 15px;
+.button-form {
+  width: 100px;
+  padding: 5px;
+  margin: 0 auto;
 }
-.text3{
-    text-decoration: none;
+.form-login-text {
+  font-size: 30px;
+  font-weight: 500;
+  padding-right: 50px;
+}
+.text2 {
+  padding-right: 40px;
+  font-size: 15px;
+}
+.text3 {
+  text-decoration: none;
 }

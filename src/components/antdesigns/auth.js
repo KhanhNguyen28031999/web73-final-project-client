@@ -21,8 +21,11 @@ const Login = () => {
           username: "",
           password: "",
         });
+
+        setTimeout(() => {
+          navigate("/home");
+        }, 1000);
       }
-      // Route.push("/home");
     } catch (error) {
       message.error("Sai tài khoản hoặc mật khẩu!");
     }
@@ -32,18 +35,18 @@ const Login = () => {
     console.error("An error occured:", errorInfo);
   };
   return (
-    <div>
-      <div>
+    <div className="auth-page">
+      <div className="auth-page-name">
         <h1>Welcome to Blog.Mindx.Project !</h1>
       </div>
       <div className="form-login">
         <div className="form-login-text">
-          <p>Login</p>
+          <p>Đăng nhập</p>
         </div>
         <div className="form-login-input">
           <Form
-            form={form}
             className="form-auth"
+            form={form}
             name="basic"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 20 }}
@@ -121,7 +124,7 @@ const Register = () => {
   };
   return (
     <div>
-      <div>
+      <div className="auth-page-name">
         <h1>Welcome to Blog.Mindx.Project !</h1>
       </div>
       <div className="form-login">

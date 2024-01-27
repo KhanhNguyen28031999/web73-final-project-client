@@ -15,7 +15,13 @@ const buttonWidth = 10;
 const PopOver = () => (
   <ConfigProvider
     button={{
-      style: { width: buttonWidth, margin: -6, border: "none" },
+      style: {
+        width: buttonWidth,
+        margin: -27,
+        border: "none",
+        backgroundColor: "transparent",
+        color: "black",
+      },
     }}
   >
     <div className="demo">

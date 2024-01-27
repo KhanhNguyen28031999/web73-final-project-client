@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Comment = ({ postId }) => {
+const Comment = ({ postId, comments }) => {
   const [content, setContent] = useState("");
   const handleSubmit = async () => {
     if (!content) {
@@ -25,6 +25,7 @@ const Comment = ({ postId }) => {
   };
   return (
     <div>
+      <p className="comment-length">{comments.length} bình luận. </p>
       <div className="comment">
         <input
           className="comment-input"

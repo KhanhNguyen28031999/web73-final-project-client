@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Card, Flex, message, Upload, Button, Avatar, Form, Input } from "antd";
 import { Container } from "react-bootstrap";
+
+import axios from "axios";
 import "../style.css";
 import { UploadOutlined } from "@ant-design/icons";
 import { InfoCircleOutlined } from "@ant-design/icons";
-const { TextArea } = Input;
 
-function Info() {
+function Info({ currentUser }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -27,29 +28,37 @@ function Info() {
       }
     },
   };
-  const changeInfo = () => {
-    var data = new URLSearchParams();
-    data.append("name", name);
-    data.append("email", email);
-    data.append("phonenumber", phone);
-    fetch("http://localhost:3001/users/info", {
-      method: "PUT",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.check === true) {
-          window.location.reload();
+  const changeInfo = async () => {
+    let dataEdit = {
+      username: name,
+      email: email,
+      phonenumber: phone,
+    };
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/auth/users/${currentUser._id}`,
+        dataEdit,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
         }
-      });
+      );
+      const result = response.data;
+      message.success("Thay đổi thông tin thành công !");
+      console.log(result);
+      window.location.reload();
+      // You can add a setState or other logic here to reflect the successful update in your component
+    } catch (error) {
+      console.error("Error updating user info:", error);
+      message.error("Failed to update user info.");
+    }
   };
+
   return (
     <div className="profile-main" style={{ textAlign: "center" }}>
       <Container>
-        <Card>
+        {/* <Card>
           <Flex style={{ height: "15vh" }} align="flex-end" justify="flex-end">
             <Upload {...props}>
               <Button icon={<UploadOutlined />}>Click to Upload</Button>
@@ -58,10 +67,15 @@ function Info() {
         </Card>
         <Avatar
           style={{ transform: "translateY(-100px)" }}
-          size={{ xs: 32, sm: 64, md: 128, lg: 128, xl: 128, xxl: 256 }}
-          icon={
-            <img src="https://th.bing.com/th/id/OIP.NrKF5Z3xqRvxdPGgYjN7ggHaHa?w=151&h=180&c=7&r=0&o=5&dpr=2&pid=1.7" />
-          }
+          size={{
+            xs: 32,
+            sm: 64,
+            md: 128,
+            lg: 128,
+            xl: 128,
+            xxl: 256,
+          }}
+          icon={<img src={currentUser.avatar} />}
         />
         <Flex
           style={{ transform: "translateY(-50px)" }}
@@ -71,13 +85,14 @@ function Info() {
           <Upload {...props}>
             <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
-        </Flex>
+        </Flex> */}
         <Form layout="vertical">
           <Form.Item label="Name" required tooltip="This is a required field">
             <Input
               size="large"
               onChange={(e) => setName(e.target.value)}
               placeholder="input placeholder"
+              value={name}
             />
           </Form.Item>
           <Form.Item label="Email" required tooltip="This is a required field">
@@ -85,6 +100,7 @@ function Info() {
               size="large"
               onChange={(e) => setEmail(e.target.value)}
               placeholder="input placeholder"
+              value={email}
             />
           </Form.Item>
           <Form.Item
@@ -96,10 +112,15 @@ function Info() {
               size="large"
               onChange={(e) => setPhone(e.target.value)}
               placeholder="input placeholder"
+              value={phone}
             />
           </Form.Item>
           <Form.Item>
-            <Button onClick={() => changeInfo()} size="large" type="primary">
+            <Button
+              onClick={() => changeInfo(name, email, phone)}
+              size="large"
+              type="primary"
+            >
               Save
             </Button>
           </Form.Item>

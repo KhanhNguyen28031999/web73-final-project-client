@@ -9,6 +9,7 @@ import Profile from "./pages/profile";
 import Notification from "./pages/noti/Notification";
 import Message from "./pages/message/Message";
 import PostDetail from "./components/posts/post-detail";
+import ProfileId from "./pages/profileid";
 
 function App() {
   const [queryClient, setQueryClient] = useState(new QueryClient());
@@ -21,6 +22,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:userId" element={<ProfileId />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
           <Route path="/home" element={<Home />} />

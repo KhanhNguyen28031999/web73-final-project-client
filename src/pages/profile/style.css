@@ -15,7 +15,6 @@
   height: 80vh;
 }
 
-
 .profiles-container {
   display: flex;
   flex-direction: row;
@@ -42,16 +41,13 @@
   /* Khoảng cách giữa thông tin và navigation */
 }
 
-.profile-information div {
-  font-size: 20pt;
-  /* Kích thước chữ chung cho các div */
+.profile-name {
+  font-size: 35px;
+  font-weight: 500;
 }
-
-.profile-information div:first-child {
-  font-size: 30pt;
-  /* Kích thước chữ lớn hơn cho div đầu tiên (Your name) */
-  font-weight: bold;
-  /* Tăng độ đậm cho div đầu tiên */
+.profile-phone {
+  font-size: 15px;
+  color: white;
 }
 
 .profile-navigation {
@@ -74,6 +70,8 @@
 
 .profile-main {
   width: 77%;
+  border-left: 1px solid gray;
+
   /* Chiều rộng của profile-main */
 }
 
@@ -102,10 +100,6 @@
   /* Tạo đường dọc phân cách profile-navigator và profile-main */
 }
 
-.profile-main {
-  border-left: 1px solid gray;
-}
-
 .profile-status {
   padding-left: 32px;
 }
@@ -119,4 +113,15 @@
   border-radius: 30px;
   margin: 5px;
   /* Khoảng cách giữa các ô vuông */
+}
+.recent-post {
+  font-weight: 500;
+  font-size: larger;
+  cursor: pointer;
+}
+
+.recent-post:hover {
+  color: blue;
+  text-decoration: underline;
+  font-style: italic;
 }

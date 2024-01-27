@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import "./style.css";
+
 const Pagination = ({ page, pageSize, totalPages, onPageChange }) => {
   const isFirstPage = page === 1;
   const isLastPage = page === totalPages;
@@ -10,11 +13,25 @@ const Pagination = ({ page, pageSize, totalPages, onPageChange }) => {
 
   return (
     <div className="pagination">
-      <button onClick={() => handlePageChange(page - 1)} disabled={isFirstPage}>
+      <button
+        className={!isFirstPage ? "previous" : "previous1"}
+        onClick={() => {
+          window.scrollTo(0, 0);
+          handlePageChange(page - 1);
+        }}
+        disabled={isFirstPage}
+      >
         Previous
       </button>
       <span>{`Page ${page} of ${totalPages}`}</span>
-      <button onClick={() => handlePageChange(page + 1)} disabled={isLastPage}>
+      <button
+        className="next"
+        onClick={() => {
+          window.scrollTo(0, 0);
+          handlePageChange(page + 1);
+        }}
+        disabled={isLastPage}
+      >
         Next
       </button>
     </div>
